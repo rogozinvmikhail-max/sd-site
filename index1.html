@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART DRINKS - Два мира. Одна правда.</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #080808;
+  --white: #F6F4EF;
+  --red: #CC1A00;
+  --green: #2A5218;
+  --green-light: #3D7325;
+  --gray-mid: #777;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+  background: rgba(8,8,8,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--white);
+}
+.nav-logo em { color: var(--red); font-style: normal; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; color: var(--gray-mid); font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 600; padding: 9px 24px;
+  border: 1px solid rgba(255,255,255,0.3); color: var(--white);
+  text-decoration: none; transition: background 0.2s, border-color 0.2s;
+}
+.nav-cta:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+
+/* HERO */
+.hero { height: 100vh; display: flex; position: relative; overflow: hidden; }
+.hero-half {
+  flex: 1; position: relative; cursor: pointer; overflow: hidden;
+  transition: flex 0.7s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding-bottom: 80px;
+}
+.hero-half:hover { flex: 1.4; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.7s ease;
+}
+.hero-half:hover .hero-bg { transform: scale(1.04); }
+.hero-overlay { position: absolute; inset: 0; }
+.hero-left .hero-overlay {
+  background: linear-gradient(to top, rgba(246,244,239,0.92) 0%, rgba(246,244,239,0.3) 50%, rgba(0,0,0,0.1) 100%);
+}
+.hero-right .hero-overlay {
+  background: linear-gradient(to top, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.4) 50%, rgba(0,0,0,0.15) 100%);
+}
+.hero-content { position: relative; z-index: 2; text-align: center; }
+.hero-brand {
+  font-family: 'Oswald', sans-serif; font-size: clamp(52px, 8vw, 100px);
+  font-weight: 700; text-transform: uppercase; line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+.hero-left .hero-brand { color: var(--green); }
+.hero-right .hero-brand { color: var(--white); }
+.hero-sub {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  margin-top: 12px; font-weight: 400; opacity: 0.6;
+}
+.hero-left .hero-sub { color: #222; }
+.hero-right .hero-sub { color: var(--white); }
+.hero-divider {
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 3px; background: var(--red); z-index: 10; pointer-events: none;
+  box-shadow: 0 0 20px rgba(204,26,0,0.6);
+}
+.hero-divider::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 8px rgba(204,26,0,0.15), 0 0 40px rgba(204,26,0,0.5);
+}
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); z-index: 20; white-space: nowrap; text-align: center;
+}
+
+/* MANIFESTO */
+.manifesto {
+  background: var(--white); color: var(--black);
+  padding: 120px 48px; text-align: center;
+}
+.manifesto-kicker {
+  font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gray-mid); margin-bottom: 36px; font-weight: 500;
+}
+.manifesto-big {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(60px, 10vw, 128px);
+  font-weight: 700; line-height: 0.88; letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.manifesto-big .red { color: var(--red); }
+.manifesto-text {
+  max-width: 520px; margin: 52px auto 0;
+  font-size: 17px; line-height: 1.75; color: #4a4a4a; font-weight: 300;
+}
+.manifesto-text strong { font-weight: 600; color: var(--black); }
+
+/* TICKER */
+.ticker { padding: 28px 0; background: #0d0d0d; overflow: hidden; }
+.ticker-track {
+  display: flex; gap: 0; width: max-content;
+  animation: scroll-left 22s linear infinite;
+}
+@keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-item {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+  padding: 0 40px; white-space: nowrap; font-weight: 400;
+  color: #444; border-right: 1px solid #222;
+}
+.ticker-item.hi { color: var(--red); }
+
+/* BRAND SECTIONS */
+.brand { min-height: 100vh; display: flex; position: relative; overflow: hidden; }
+.brand-img {
+  flex: 1.1; position: relative; overflow: hidden;
+}
+.brand-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+.brand:hover .brand-img img { transform: scale(1.03); }
+.brand-body {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; padding: 80px 64px 80px 72px;
+  text-align: left; position: relative; z-index: 2;
+}
+
+/* ЖИВАЯ */
+.brand-zhivaya { background: var(--white); color: var(--black); }
+.brand-zhivaya .brand-body { padding: 80px 72px 80px 64px; }
+.zhivaya-kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-light); margin-bottom: 20px; font-weight: 500; }
+.zhivaya-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(64px, 7vw, 96px); font-weight: 700;
+  text-transform: uppercase; color: var(--green); line-height: 0.88; margin-bottom: 28px;
+}
+.zhivaya-tag {
+  font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4;
+  color: #444; margin-bottom: 36px; max-width: 380px;
+}
+.zhivaya-traits { list-style: none; margin-bottom: 52px; }
+.zhivaya-traits li {
+  font-size: 14px; color: #555; padding: 8px 0;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex; align-items: center; gap: 14px;
+}
+.zhivaya-traits li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); flex-shrink:0; }
+.btn-green {
+  display: inline-block; font-family: 'Oswald', sans-serif;
+  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 600; padding: 14px 40px; text-decoration: none;
+  border: 2px solid var(--green); color: var(--green);
+  transition: all 0.25s;
+}
+.btn-green:hover { background: var(--green); color: var(--white); }
+
+/* DEAD WATER */
+.brand-dead { background: var(--black); color: var(--white); flex-direction: row-reverse; }
+.dead-kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; }
+.dead-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(64px, 7vw, 96px); font-weight: 700;
+  text-transform: uppercase; line-height: 0.88; margin-bottom: 28px;
+}
+.dead-tag {
+  font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4;
+  color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 380px;
+}
+.dead-traits { list-style: none; margin-bottom: 52px; }
+.dead-traits li {
+  font-size: 14px; color: rgba(255,255,255,0.45); padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 14px;
+}
+.dead-traits li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--red); flex-shrink:0; }
+.btn-red {
+  display: inline-block; font-family: 'Oswald', sans-serif;
+  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 600; padding: 14px 40px; text-decoration: none;
+  border: 2px solid var(--red); color: var(--red);
+  box-shadow: 0 0 20px rgba(204,26,0,0.15);
+  transition: all 0.25s;
+}
+.btn-red:hover { background: var(--red); color: var(--white); box-shadow: 0 0 40px rgba(204,26,0,0.35); }
+
+/* GALLERY */
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #050505; }
+.gallery-item { aspect-ratio: 1; overflow: hidden; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.gallery-item:hover img { transform: scale(1.07); }
+.gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
+
+/* B2B */
+.b2b { padding: 120px 60px; background: var(--white); color: var(--black); }
+.section-kicker { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 20px; font-weight: 500; }
+.b2b .section-kicker { color: var(--green); }
+.section-h {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(36px, 5vw, 64px); font-weight: 700;
+  text-transform: uppercase; line-height: 0.92; margin-bottom: 64px;
+}
+.channels {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px;
+}
+.channel {
+  padding: 32px 28px; border: 1px solid #e2e2e2;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.channel:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(42,82,24,0.1); }
+.ch-icon { font-size: 26px; margin-bottom: 16px; }
+.ch-name { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.ch-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+/* CTA */
+.cta-block {
+  padding: 140px 60px; background: var(--black); text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-block::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(204,26,0,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-h {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(48px, 7vw, 100px); font-weight: 700;
+  text-transform: uppercase; line-height: 0.9; margin-bottom: 20px;
+}
+.cta-sub { font-size: 16px; color: var(--gray-mid); max-width: 460px; margin: 0 auto 52px; line-height: 1.65; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-primary {
+  font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 600; padding: 16px 48px;
+  background: var(--red); color: var(--white); text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.cta-primary:hover { background: #a81400; box-shadow: 0 0 50px rgba(204,26,0,0.4); }
+.cta-secondary {
+  font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 600; padding: 16px 48px;
+  border: 1px solid rgba(255,255,255,0.2); color: var(--white); text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cta-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+/* FOOTER */
+footer {
+  padding: 48px 60px; background: #040404;
+  border-top: 1px solid #111;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+}
+.footer-logo { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.footer-logo em { color: var(--red); font-style: normal; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #444; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 11px; color: #2a2a2a; }
+
+/* REVEAL */
+.r { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.r.on { opacity: 1; transform: none; }
+.r2 { transition-delay: 0.1s; }
+.r3 { transition-delay: 0.2s; }
+.r4 { transition-delay: 0.3s; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-half:hover { flex: 1; }
+  .brand { flex-direction: column !important; min-height: auto; }
+  .brand-img { min-height: 50vw; }
+  .brand-body { padding: 56px 28px !important; }
+  .gallery { grid-template-columns: repeat(2,1fr); }
+  .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
+  .b2b, .cta-block { padding: 80px 28px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SMART<em>&nbsp;DRINKS</em></div>
+  <ul class="nav-links">
+    <li><a href="#zhivaya">Живая</a></li>
+    <li><a href="#dead">DEAD WATER</a></li>
+    <li><a href="#partners">Партнёрам</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Стать партнёром</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-half hero-left" onclick="document.getElementById('zhivaya').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-bg" style="background-image:url('zhivaya-hero.png')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-brand">ЖИВАЯ</div>
+      <div class="hero-sub">Жизнь в простом</div>
+    </div>
+  </div>
+
+  <div class="hero-divider"></div>
+
+  <div class="hero-half hero-right" onclick="document.getElementById('dead').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-bg" style="background-image:url('dead-splash.png')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-brand">DEAD<br>WATER</div>
+      <div class="hero-sub">Анти-энергетик</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Два мира. Одна правда. &nbsp; ↓</div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-kicker r">Smart Drinks - Умный выбор</div>
+  <div class="manifesto-big r r2">СОСТАВ:<br><span class="red">ВОДА.</span></div>
+  <p class="manifesto-text r r3">
+    Мы не обещаем суперсилу. Не добавляем ничего лишнего.<br>
+    Пока все вокруг продают <strong>воздух в красивой упаковке</strong>,<br>
+    мы продаём именно то, что написано на банке.
+  </p>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item hi">СОСТАВ: ВОДА</span>
+    <span class="ticker-item">без сахара</span>
+    <span class="ticker-item">без добавок</span>
+    <span class="ticker-item">без обещаний</span>
+    <span class="ticker-item hi">100% честность</span>
+    <span class="ticker-item">без таурина</span>
+    <span class="ticker-item">без красителей</span>
+    <span class="ticker-item hi">SMART DRINKS</span>
+    <span class="ticker-item">без химии</span>
+    <span class="ticker-item">два мира</span>
+    <span class="ticker-item hi">одна правда</span>
+    <span class="ticker-item">500 мл</span>
+    <!-- repeat for loop -->
+    <span class="ticker-item hi">СОСТАВ: ВОДА</span>
+    <span class="ticker-item">без сахара</span>
+    <span class="ticker-item">без добавок</span>
+    <span class="ticker-item">без обещаний</span>
+    <span class="ticker-item hi">100% честность</span>
+    <span class="ticker-item">без таурина</span>
+    <span class="ticker-item">без красителей</span>
+    <span class="ticker-item hi">SMART DRINKS</span>
+    <span class="ticker-item">без химии</span>
+    <span class="ticker-item">два мира</span>
+    <span class="ticker-item hi">одна правда</span>
+    <span class="ticker-item">500 мл</span>
+  </div>
+</div>
+
+<!-- ЖИВАЯ -->
+<section class="brand brand-zhivaya" id="zhivaya">
+  <div class="brand-img">
+    <img src="zhivaya-lake.png" alt="ЖИВАЯ - вода у горного озера">
+  </div>
+  <div class="brand-body">
+    <div class="zhivaya-kicker r">Бренд №1 - Природа и осознанность</div>
+    <div class="zhivaya-name r r2">ЖИВАЯ</div>
+    <p class="zhivaya-tag r r3">Жизнь в простом. На деле - вода.</p>
+    <ul class="zhivaya-traits r r4">
+      <li>Природа, горы, свежесть</li>
+      <li>Спорт, активный досуг, пробежки</li>
+      <li>Дневная энергия без химии</li>
+      <li>Для тех, кто выбирает честность</li>
+    </ul>
+    <a href="#contact" class="btn-green r">Заказать партию</a>
+  </div>
+</section>
+
+<!-- DEAD WATER -->
+<section class="brand brand-dead" id="dead">
+  <div class="brand-img">
+    <img src="dead-concert.png" alt="DEAD WATER - на концерте">
+  </div>
+  <div class="brand-body">
+    <div class="dead-kicker r">Бренд №2 - Анти-энергетик</div>
+    <div class="dead-name r r2">DEAD<br>WATER</div>
+    <p class="dead-tag r r3">Анти-маркетинг. Контраст. На деле - вода.</p>
+    <ul class="dead-traits r r4">
+      <li>Ночь, город, клубы, фестивали</li>
+      <li>Киберспорт и стриминг</li>
+      <li>Ирония над энергетиками</li>
+      <li>Та же банка. Честный состав.</li>
+    </ul>
+    <a href="#contact" class="btn-red r">Заказать партию</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="gallery-item tall">
+    <img src="zhivaya-gym.png" alt="ЖИВАЯ в зале">
+  </div>
+  <div class="gallery-item">
+    <img src="dead-ice.png" alt="DEAD WATER во льду">
+  </div>
+  <div class="gallery-item">
+    <img src="zhivaya-girl.png" alt="ЖИВАЯ - образ жизни">
+  </div>
+  <div class="gallery-item">
+    <img src="dead-concert2.png" alt="DEAD WATER - концерт">
+  </div>
+  <div class="gallery-item">
+    <img src="zhivaya-lake2.png" alt="ЖИВАЯ у озера">
+  </div>
+</div>
+
+<!-- B2B -->
+<section class="b2b" id="partners">
+  <div class="section-kicker r">Для бизнеса - Волна 1</div>
+  <div class="section-h r r2">Где мы<br>появляемся первыми</div>
+  <div class="channels">
+    <div class="channel r">
+      <div class="ch-name">Компьютерные клубы</div>
+      <div class="ch-desc">Федеральные и локальные сети. Геймеры, стримеры, киберспорт. Ежедневный контакт с аудиторией.</div>
+    </div>
+    <div class="channel r r2">
+      <div class="ch-name">Лазертаг и VR</div>
+      <div class="ch-desc">Картинг-центры, арены, экстрим-парки. Активный досуг и высокий трафик.</div>
+    </div>
+    <div class="channel r r3">
+      <div class="ch-name">Бары и клубы</div>
+      <div class="ch-desc">Концерты, фестивали, ночная жизнь. Основная среда для Dead Water.</div>
+    </div>
+    <div class="channel r r4">
+      <div class="ch-name">Кофейни</div>
+      <div class="ch-desc">Городская молодёжь. Ежедневный трафик, высокая лояльность.</div>
+    </div>
+    <div class="channel r">
+      <div class="ch-name">Скейт-парки</div>
+      <div class="ch-desc">Стрит-культура, самовыражение. Органическая вирусность.</div>
+    </div>
+    <div class="channel r r2">
+      <div class="ch-name">Коворкинги</div>
+      <div class="ch-desc">Стартапы, студенты, фрилансеры. Осознанная аудитория.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-block" id="contact">
+  <div class="cta-h r">СТАТЬ<br>ПАРТНЁРОМ</div>
+  <p class="cta-sub r r2">
+    Ищем первых партнёров в РФ - компьютерные клубы, бары,
+    кофейни, лазертаг-арены и фестивали.
+  </p>
+  <div class="cta-btns r r3">
+    <a class="cta-primary" href="mailto:sales@smartdrinks.pro">Написать нам</a>
+    <a class="cta-secondary" href="https://t.me/SmartDrinksbot">Telegram</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SMART<em>&nbsp;DRINKS</em></div>
+  <div class="footer-links">
+    <a href="#zhivaya">Живая</a>
+    <a href="#dead">Dead Water</a>
+    <a href="#partners">Партнёрам</a>
+    <a href="mailto:info@smartdrinks.pro">info@smartdrinks.pro</a>
+  </div>
+  <div class="footer-copy">© 2026 ООО «Смарт Дринкс»</div>
+</footer>
+
+<script>
+// Hero mouse parallax
+const heroEl = document.querySelector('.hero');
+const hLeft = document.querySelector('.hero-left');
+const hRight = document.querySelector('.hero-right');
+if (heroEl) {
+  heroEl.addEventListener('mousemove', e => {
+    const x = e.clientX / heroEl.offsetWidth;
+    hLeft.style.flex = String(1 + (0.5 - x) * 0.5);
+    hRight.style.flex = String(1 + (x - 0.5) * 0.5);
+  });
+  heroEl.addEventListener('mouseleave', () => {
+    hLeft.style.flex = '1';
+    hRight.style.flex = '1';
+  });
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

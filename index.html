@@ -3,319 +3,440 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMART DRINKS - Два мира. Одна правда.</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>SMART DRINKS — Два мира. Одна правда.</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --black: #080808;
-  --white: #F6F4EF;
-  --red: #CC1A00;
-  --green: #2A5218;
-  --green-light: #3D7325;
-  --gray-mid: #777;
+  --black: #060606;
+  --white: #F5F3EE;
+  --red: #C91800;
+  --red-glow: rgba(201,24,0,0.55);
+  --green: #274E14;
+  --green-mid: #3A6B1E;
+  --green-glow: rgba(39,78,20,0.4);
+  --gray: #181818;
+  --muted: #666;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; cursor: default; }
 
-/* NAV */
+/* ── GRAIN OVERLAY (Monster DNA) ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+/* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px; height: 68px;
-  background: rgba(8,8,8,0.88);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 52px; height: 70px;
+  background: rgba(6,6,6,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .nav-logo {
-  font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 0.22em; color: var(--white);
 }
 .nav-logo em { color: var(--red); font-style: normal; }
-.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links { display: flex; gap: 44px; list-style: none; }
 .nav-links a {
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  text-decoration: none; color: var(--gray-mid); font-weight: 500;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  text-decoration: none; color: var(--muted); font-weight: 500;
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--white); }
 .nav-cta {
-  font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.18em;
-  text-transform: uppercase; font-weight: 600; padding: 9px 24px;
-  border: 1px solid rgba(255,255,255,0.3); color: var(--white);
-  text-decoration: none; transition: background 0.2s, border-color 0.2s;
+  font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 600; padding: 10px 26px;
+  background: var(--red); color: var(--white); text-decoration: none;
+  transition: box-shadow 0.25s, background 0.25s;
 }
-.nav-cta:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+.nav-cta:hover { background: #a81300; box-shadow: 0 0 28px var(--red-glow); }
 
-/* HERO */
+/* ── HERO SPLIT (Liquid Death × Red Bull) ── */
 .hero { height: 100vh; display: flex; position: relative; overflow: hidden; }
 .hero-half {
   flex: 1; position: relative; cursor: pointer; overflow: hidden;
-  transition: flex 0.7s cubic-bezier(0.4,0,0.2,1);
   display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  padding-bottom: 80px;
+  padding-bottom: 88px;
+  transition: flex 0.75s cubic-bezier(0.4,0,0.2,1);
 }
-.hero-half:hover { flex: 1.4; }
+.hero-half:hover { flex: 1.45; }
 .hero-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transition: transform 0.7s ease;
+  transition: transform 0.8s ease;
 }
-.hero-half:hover .hero-bg { transform: scale(1.04); }
+.hero-half:hover .hero-bg { transform: scale(1.05); }
 .hero-overlay { position: absolute; inset: 0; }
 .hero-left .hero-overlay {
-  background: linear-gradient(to top, rgba(246,244,239,0.92) 0%, rgba(246,244,239,0.3) 50%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(to top, rgba(245,243,238,0.94) 0%, rgba(245,243,238,0.25) 55%, transparent 100%);
 }
 .hero-right .hero-overlay {
-  background: linear-gradient(to top, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.4) 50%, rgba(0,0,0,0.15) 100%);
+  background: linear-gradient(to top, rgba(6,6,6,0.97) 0%, rgba(6,6,6,0.45) 55%, rgba(0,0,0,0.1) 100%);
+}
+/* Red neon edge on right (Monster DNA) */
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to right, rgba(201,24,0,0.08) 0%, transparent 30%);
+  pointer-events: none;
 }
 .hero-content { position: relative; z-index: 2; text-align: center; }
 .hero-brand {
-  font-family: 'Oswald', sans-serif; font-size: clamp(52px, 8vw, 100px);
-  font-weight: 700; text-transform: uppercase; line-height: 0.88;
-  letter-spacing: -0.01em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 9vw, 116px);
+  line-height: 0.88; letter-spacing: 0.04em;
 }
 .hero-left .hero-brand { color: var(--green); }
-.hero-right .hero-brand { color: var(--white); }
-.hero-sub {
-  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-  margin-top: 12px; font-weight: 400; opacity: 0.6;
+.hero-right .hero-brand {
+  color: var(--white);
+  text-shadow: 0 0 60px rgba(201,24,0,0.3);
 }
-.hero-left .hero-sub { color: #222; }
-.hero-right .hero-sub { color: var(--white); }
+.hero-right:hover .hero-brand { text-shadow: 0 0 80px rgba(201,24,0,0.6); }
+.hero-tag {
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  margin-top: 14px; font-weight: 400;
+}
+.hero-left .hero-tag { color: rgba(0,0,0,0.45); }
+.hero-right .hero-tag { color: rgba(255,255,255,0.4); }
+
+/* Divider */
 .hero-divider {
-  position: absolute; left: 50%; top: 0; bottom: 0;
-  width: 3px; background: var(--red); z-index: 10; pointer-events: none;
-  box-shadow: 0 0 20px rgba(204,26,0,0.6);
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, transparent 0%, var(--red) 20%, var(--red) 80%, transparent 100%);
+  z-index: 10; pointer-events: none;
+  box-shadow: 0 0 16px var(--red-glow), 0 0 40px rgba(201,24,0,0.2);
 }
-.hero-divider::after {
-  content: ''; position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  width: 48px; height: 48px; border-radius: 50%;
+.divider-dot {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 44px; height: 44px; border-radius: 50%;
   background: var(--red);
-  box-shadow: 0 0 0 8px rgba(204,26,0,0.15), 0 0 40px rgba(204,26,0,0.5);
+  box-shadow: 0 0 0 10px rgba(201,24,0,0.12), 0 0 50px var(--red-glow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; user-select: none;
 }
-.hero-scroll {
-  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); z-index: 20; white-space: nowrap; text-align: center;
+.hero-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); z-index: 20; white-space: nowrap;
 }
 
-/* MANIFESTO */
-.manifesto {
+/* ── NUMBERS BAR (Red Bull / Nocco DNA) ── */
+.numbers {
+  display: grid; grid-template-columns: repeat(4, 1fr);
   background: var(--white); color: var(--black);
-  padding: 120px 48px; text-align: center;
 }
-.manifesto-kicker {
-  font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--gray-mid); margin-bottom: 36px; font-weight: 500;
+.num-cell {
+  padding: 52px 40px; border-right: 1px solid #ddd;
+  text-align: center;
 }
-.manifesto-big {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(60px, 10vw, 128px);
-  font-weight: 700; line-height: 0.88; letter-spacing: -0.02em;
-  text-transform: uppercase;
+.num-cell:last-child { border-right: none; }
+.num-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 5vw, 80px); line-height: 1;
+  letter-spacing: 0.04em; color: var(--black);
 }
-.manifesto-big .red { color: var(--red); }
-.manifesto-text {
-  max-width: 520px; margin: 52px auto 0;
-  font-size: 17px; line-height: 1.75; color: #4a4a4a; font-weight: 300;
+.num-big.accent { color: var(--red); }
+.num-big.green { color: var(--green); }
+.num-label {
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: #888; margin-top: 8px; font-weight: 500;
 }
-.manifesto-text strong { font-weight: 600; color: var(--black); }
 
-/* TICKER */
-.ticker { padding: 28px 0; background: #0d0d0d; overflow: hidden; }
+/* ── MANIFESTO (BrewDog Punk IPA DNA) ── */
+.manifesto {
+  background: var(--black); padding: 120px 52px;
+  position: relative; overflow: hidden;
+}
+.manifesto::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,24,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.manifesto-eyebrow {
+  font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 28px; font-weight: 500;
+}
+.manifesto-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 9vw, 130px); line-height: 0.88;
+  letter-spacing: 0.03em; max-width: 900px;
+  margin-bottom: 56px;
+}
+.manifesto-h .dim { color: #333; }
+/* Punk statements grid */
+.punk-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: #161616;
+  border: 1px solid #161616;
+  margin-top: 0;
+}
+.punk-cell {
+  background: var(--black); padding: 44px 48px;
+}
+.punk-cell:hover { background: #0d0d0d; }
+.punk-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; letter-spacing: 0.25em; color: var(--red);
+  margin-bottom: 16px;
+}
+.punk-stmt {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(22px, 2.5vw, 30px); font-weight: 600;
+  text-transform: uppercase; line-height: 1.15; margin-bottom: 14px;
+}
+.punk-body { font-size: 14px; color: #555; line-height: 1.7; font-weight: 300; }
+
+/* ── TICKER ── */
+.ticker { padding: 26px 0; background: var(--red); overflow: hidden; }
 .ticker-track {
-  display: flex; gap: 0; width: max-content;
-  animation: scroll-left 22s linear infinite;
+  display: flex; width: max-content;
+  animation: scroll-left 18s linear infinite;
 }
 @keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 .ticker-item {
-  font-family: 'Oswald', sans-serif;
-  font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
-  padding: 0 40px; white-space: nowrap; font-weight: 400;
-  color: #444; border-right: 1px solid #222;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 0.22em;
+  padding: 0 36px; white-space: nowrap;
+  color: rgba(255,255,255,0.9); border-right: 1px solid rgba(255,255,255,0.25);
 }
-.ticker-item.hi { color: var(--red); }
+.ticker-item.dim { color: rgba(255,255,255,0.45); }
 
-/* BRAND SECTIONS */
+/* ── BRAND SECTIONS ── */
 .brand { min-height: 100vh; display: flex; position: relative; overflow: hidden; }
-.brand-img {
-  flex: 1.1; position: relative; overflow: hidden;
+.brand-photo { flex: 1.15; position: relative; overflow: hidden; }
+.brand-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.9s ease;
 }
-.brand-img img {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block;
-  transition: transform 0.8s ease;
-}
-.brand:hover .brand-img img { transform: scale(1.03); }
+.brand:hover .brand-photo img { transform: scale(1.04); }
 .brand-body {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  flex-direction: column; padding: 80px 64px 80px 72px;
-  text-align: left; position: relative; z-index: 2;
+  flex: 1; display: flex; align-items: flex-start; justify-content: center;
+  flex-direction: column; padding: 100px 72px; position: relative; z-index: 2;
 }
 
 /* ЖИВАЯ */
-.brand-zhivaya { background: var(--white); color: var(--black); }
-.brand-zhivaya .brand-body { padding: 80px 72px 80px 64px; }
-.zhivaya-kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-light); margin-bottom: 20px; font-weight: 500; }
-.zhivaya-name {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(64px, 7vw, 96px); font-weight: 700;
-  text-transform: uppercase; color: var(--green); line-height: 0.88; margin-bottom: 28px;
+.brand-z { background: var(--white); color: var(--black); }
+.brand-z .brand-body { padding: 100px 64px 100px 72px; }
+.z-eye { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 20px; font-weight: 500; }
+.z-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 8vw, 120px); line-height: 0.84;
+  color: var(--green); margin-bottom: 24px; letter-spacing: 0.02em;
 }
-.zhivaya-tag {
-  font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4;
-  color: #444; margin-bottom: 36px; max-width: 380px;
+.z-lead { font-size: clamp(17px, 1.8vw, 21px); font-weight: 300; line-height: 1.5; color: #444; margin-bottom: 40px; max-width: 360px; }
+.z-list { list-style: none; margin-bottom: 56px; }
+.z-list li {
+  font-size: 13px; color: #555; padding: 10px 0;
+  border-bottom: 1px solid #ececec;
+  display: flex; align-items: center; gap: 16px;
+  letter-spacing: 0.02em;
 }
-.zhivaya-traits { list-style: none; margin-bottom: 52px; }
-.zhivaya-traits li {
-  font-size: 14px; color: #555; padding: 8px 0;
-  border-bottom: 1px solid #e8e8e8;
-  display: flex; align-items: center; gap: 14px;
-}
-.zhivaya-traits li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); flex-shrink:0; }
-.btn-green {
+.z-list li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--green); flex-shrink:0; }
+.btn-z {
   display: inline-block; font-family: 'Oswald', sans-serif;
-  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-  font-weight: 600; padding: 14px 40px; text-decoration: none;
-  border: 2px solid var(--green); color: var(--green);
-  transition: all 0.25s;
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  font-weight: 600; padding: 14px 44px; text-decoration: none;
+  background: var(--green); color: var(--white);
+  transition: background 0.2s, box-shadow 0.2s;
 }
-.btn-green:hover { background: var(--green); color: var(--white); }
+.btn-z:hover { background: var(--green-mid); box-shadow: 0 8px 32px var(--green-glow); }
 
 /* DEAD WATER */
-.brand-dead { background: var(--black); color: var(--white); flex-direction: row-reverse; }
-.dead-kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; }
-.dead-name {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(64px, 7vw, 96px); font-weight: 700;
-  text-transform: uppercase; line-height: 0.88; margin-bottom: 28px;
+.brand-d { background: var(--black); flex-direction: row-reverse; }
+/* Subtle red vignette on Dead Water section */
+.brand-d::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(ellipse at 60% 50%, rgba(201,24,0,0.07) 0%, transparent 65%);
 }
-.dead-tag {
-  font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4;
-  color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 380px;
+.d-eye { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; }
+.d-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 8vw, 120px); line-height: 0.84;
+  color: var(--white); margin-bottom: 24px; letter-spacing: 0.02em;
+  text-shadow: 0 0 60px rgba(201,24,0,0.25);
 }
-.dead-traits { list-style: none; margin-bottom: 52px; }
-.dead-traits li {
-  font-size: 14px; color: rgba(255,255,255,0.45); padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  display: flex; align-items: center; gap: 14px;
+.d-lead { font-size: clamp(17px, 1.8vw, 21px); font-weight: 300; line-height: 1.5; color: rgba(255,255,255,0.55); margin-bottom: 40px; max-width: 360px; }
+.d-list { list-style: none; margin-bottom: 56px; }
+.d-list li {
+  font-size: 13px; color: rgba(255,255,255,0.4); padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; gap: 16px;
+  letter-spacing: 0.02em;
 }
-.dead-traits li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--red); flex-shrink:0; }
-.btn-red {
+.d-list li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--red); flex-shrink:0; }
+.btn-d {
   display: inline-block; font-family: 'Oswald', sans-serif;
-  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-  font-weight: 600; padding: 14px 40px; text-decoration: none;
-  border: 2px solid var(--red); color: var(--red);
-  box-shadow: 0 0 20px rgba(204,26,0,0.15);
-  transition: all 0.25s;
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  font-weight: 600; padding: 14px 44px; text-decoration: none;
+  border: 1px solid var(--red); color: var(--red);
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
 }
-.btn-red:hover { background: var(--red); color: var(--white); box-shadow: 0 0 40px rgba(204,26,0,0.35); }
+.btn-d:hover { background: var(--red); color: var(--white); box-shadow: 0 0 40px var(--red-glow); }
 
-/* GALLERY */
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #050505; }
-.gallery-item { aspect-ratio: 1; overflow: hidden; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-.gallery-item:hover img { transform: scale(1.07); }
-.gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
-
-/* B2B */
-.b2b { padding: 120px 60px; background: var(--white); color: var(--black); }
-.section-kicker { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 20px; font-weight: 500; }
-.b2b .section-kicker { color: var(--green); }
-.section-h {
+/* ── GALLERY (Liquid Death editorial grid) ── */
+.gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 50vh 50vh;
+  gap: 3px; background: #111;
+}
+.gi { overflow: hidden; position: relative; }
+.gi img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s ease; }
+.gi:hover img { transform: scale(1.06); }
+.gi-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 2;
   font-family: 'Oswald', sans-serif;
-  font-size: clamp(36px, 5vw, 64px); font-weight: 700;
-  text-transform: uppercase; line-height: 0.92; margin-bottom: 64px;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  background: rgba(0,0,0,0.6); color: var(--white);
+  padding: 5px 10px; font-weight: 400;
+  backdrop-filter: blur(4px);
 }
-.channels {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px;
-}
-.channel {
-  padding: 32px 28px; border: 1px solid #e2e2e2;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-.channel:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(42,82,24,0.1); }
-.ch-icon { font-size: 26px; margin-bottom: 16px; }
-.ch-name { font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-.ch-desc { font-size: 13px; color: #666; line-height: 1.6; }
+.gi-label.green-label { background: rgba(39,78,20,0.75); }
+.gi-label.red-label { background: rgba(201,24,0,0.75); }
+.gi:first-child { grid-row: 1 / 3; }
 
-/* CTA */
-.cta-block {
-  padding: 140px 60px; background: var(--black); text-align: center;
+/* ── B2B SECTION ── */
+.b2b { padding: 120px 52px; background: #0a0a0a; }
+.b2b-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px; flex-wrap: wrap; gap: 24px; }
+.sec-eye { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.sec-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 72px); line-height: 0.9;
+}
+.b2b-sub { font-size: 14px; color: #444; max-width: 320px; line-height: 1.6; }
+.channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #161616; }
+.ch {
+  background: #0a0a0a; padding: 40px 36px;
+  border-top: 2px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.ch:hover { border-top-color: var(--red); background: #0d0d0d; }
+.ch-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: #1e1e1e; line-height: 1; margin-bottom: 20px;
+}
+.ch-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 12px;
+}
+.ch-desc { font-size: 13px; color: #444; line-height: 1.65; }
+
+/* ── ANTI-STATEMENT (BrewDog DNA) ── */
+.anti {
+  padding: 100px 52px; background: var(--white); color: var(--black);
+  text-align: center;
+}
+.anti-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1; max-width: 900px; margin: 0 auto 48px;
+  letter-spacing: 0.03em;
+}
+.anti-quote .strike {
+  text-decoration: line-through; color: #bbb;
+}
+.anti-quote .truth { color: var(--red); }
+.anti-attrs { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+.anti-attr {
+  padding: 18px 40px; border-right: 1px solid #ddd;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #999; font-weight: 500;
+}
+.anti-attr:last-child { border-right: none; }
+.anti-attr strong { display: block; font-family: 'Oswald', sans-serif; font-size: 22px; color: var(--black); font-weight: 700; margin-bottom: 4px; letter-spacing: 0; }
+
+/* ── CTA ── */
+.cta-sec {
+  padding: 160px 52px; background: var(--black); text-align: center;
   position: relative; overflow: hidden;
 }
-.cta-block::before {
-  content: ''; position: absolute; top: 50%; left: 50%;
+.cta-sec::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  width: 700px; height: 700px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(204,26,0,0.07) 0%, transparent 70%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,24,0,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 .cta-h {
-  font-family: 'Oswald', sans-serif;
-  font-size: clamp(48px, 7vw, 100px); font-weight: 700;
-  text-transform: uppercase; line-height: 0.9; margin-bottom: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 9vw, 120px); line-height: 0.88;
+  letter-spacing: 0.04em; margin-bottom: 20px;
 }
-.cta-sub { font-size: 16px; color: var(--gray-mid); max-width: 460px; margin: 0 auto 52px; line-height: 1.65; }
-.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.cta-primary {
-  font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.2em;
-  text-transform: uppercase; font-weight: 600; padding: 16px 48px;
+.cta-body { font-size: 16px; color: var(--muted); max-width: 440px; margin: 0 auto 52px; line-height: 1.7; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-main {
+  font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 600; padding: 16px 52px;
   background: var(--red); color: var(--white); text-decoration: none;
   transition: background 0.2s, box-shadow 0.2s;
 }
-.cta-primary:hover { background: #a81400; box-shadow: 0 0 50px rgba(204,26,0,0.4); }
-.cta-secondary {
-  font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.2em;
-  text-transform: uppercase; font-weight: 600; padding: 16px 48px;
-  border: 1px solid rgba(255,255,255,0.2); color: var(--white); text-decoration: none;
-  transition: border-color 0.2s, background 0.2s;
+.btn-main:hover { background: #a81300; box-shadow: 0 0 50px var(--red-glow); }
+.btn-ghost {
+  font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 600; padding: 16px 52px;
+  border: 1px solid #252525; color: #555; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
 }
-.cta-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+.btn-ghost:hover { border-color: #555; color: var(--white); }
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer {
-  padding: 48px 60px; background: #040404;
+  padding: 52px; background: #040404;
   border-top: 1px solid #111;
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
 }
-.footer-logo { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.18em; }
 .footer-logo em { color: var(--red); font-style: normal; }
-.footer-links { display: flex; gap: 28px; }
-.footer-links a { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #444; text-decoration: none; transition: color 0.2s; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #333; text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--white); }
-.footer-copy { font-size: 11px; color: #2a2a2a; }
+.footer-copy { font-size: 10px; color: #222; }
 
-/* REVEAL */
-.r { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+/* ── REVEAL ── */
+.r { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .r.on { opacity: 1; transform: none; }
-.r2 { transition-delay: 0.1s; }
-.r3 { transition-delay: 0.2s; }
-.r4 { transition-delay: 0.3s; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
-  .hero-half:hover { flex: 1; }
+  .numbers { grid-template-columns: repeat(2,1fr); }
+  .punk-grid { grid-template-columns: 1fr; }
   .brand { flex-direction: column !important; min-height: auto; }
-  .brand-img { min-height: 50vw; }
+  .brand-photo { min-height: 55vw; }
   .brand-body { padding: 56px 28px !important; }
-  .gallery { grid-template-columns: repeat(2,1fr); }
-  .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
-  .b2b, .cta-block { padding: 80px 28px; }
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gi:first-child { grid-row: auto; }
+  .channels { grid-template-columns: 1fr 1fr; }
+  .b2b { padding: 80px 28px; }
+  .anti-attrs { flex-direction: column; align-items: center; }
+  .anti-attr { border-right: none; border-bottom: 1px solid #ddd; }
   footer { flex-direction: column; text-align: center; }
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">SMART<em>&nbsp;DRINKS</em></div>
+  <div class="nav-logo">SMART<em> DRINKS</em></div>
   <ul class="nav-links">
     <li><a href="#zhivaya">Живая</a></li>
-    <li><a href="#dead">DEAD WATER</a></li>
+    <li><a href="#dead">Dead Water</a></li>
     <li><a href="#partners">Партнёрам</a></li>
     <li><a href="#contact">Контакты</a></li>
   </ul>
@@ -329,170 +450,245 @@ footer {
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-brand">ЖИВАЯ</div>
-      <div class="hero-sub">Жизнь в простом</div>
+      <div class="hero-tag">Природа и честность</div>
     </div>
   </div>
 
-  <div class="hero-divider"></div>
+  <div class="hero-divider">
+    <div class="divider-dot">⚡</div>
+  </div>
 
   <div class="hero-half hero-right" onclick="document.getElementById('dead').scrollIntoView({behavior:'smooth'})">
     <div class="hero-bg" style="background-image:url('dead-splash.png')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-brand">DEAD<br>WATER</div>
-      <div class="hero-sub">Анти-энергетик</div>
+      <div class="hero-tag">Анти-энергетик</div>
     </div>
   </div>
 
-  <div class="hero-scroll">Два мира. Одна правда. &nbsp; ↓</div>
+  <div class="hero-hint">↓ &nbsp; Два мира. Одна правда. &nbsp; ↓</div>
 </section>
 
-<!-- MANIFESTO -->
+<!-- NUMBERS (Red Bull / Nocco) -->
+<div class="numbers">
+  <div class="num-cell r">
+    <div class="num-big green">0</div>
+    <div class="num-label">Добавок и химии</div>
+  </div>
+  <div class="num-cell r d1">
+    <div class="num-big green">0</div>
+    <div class="num-label">Сахара и красителей</div>
+  </div>
+  <div class="num-cell r d2">
+    <div class="num-big accent">500</div>
+    <div class="num-label">Миллилитров воды</div>
+  </div>
+  <div class="num-cell r d3">
+    <div class="num-big">1</div>
+    <div class="num-label">Правда в составе</div>
+  </div>
+</div>
+
+<!-- MANIFESTO (BrewDog Punk DNA) -->
 <section class="manifesto">
-  <div class="manifesto-kicker r">Smart Drinks - Умный выбор</div>
-  <div class="manifesto-big r r2">СОСТАВ:<br><span class="red">ВОДА.</span></div>
-  <p class="manifesto-text r r3">
-    Мы не обещаем суперсилу. Не добавляем ничего лишнего.<br>
-    Пока все вокруг продают <strong>воздух в красивой упаковке</strong>,<br>
-    мы продаём именно то, что написано на банке.
-  </p>
+  <div class="manifesto-eyebrow r">Наш манифест</div>
+  <div class="manifesto-h r d1">
+    МЫ НЕ ПРОДАЁМ<br>
+    <span class="dim">СУПЕРСИЛУ.</span><br>
+    МЫ ПРОДАЁМ<br>ВОДУ.
+  </div>
+  <div class="punk-grid">
+    <div class="punk-cell r">
+      <div class="punk-num">01</div>
+      <div class="punk-stmt">Против пустых обещаний</div>
+      <div class="punk-body">Red Bull не даст тебе крылья. Monster не сделает тебя монстром. Мы не обещаем ничего — кроме того, что написано на банке. Состав: вода.</div>
+    </div>
+    <div class="punk-cell r d1">
+      <div class="punk-num">02</div>
+      <div class="punk-stmt">Против пластика и лжи</div>
+      <div class="punk-body">Алюминий перерабатывается бесконечно. Мы не прячем состав за мелким шрифтом. Никакого таурина, никаких красителей, никакой химии для «вкуса».</div>
+    </div>
+    <div class="punk-cell r d2">
+      <div class="punk-num">03</div>
+      <div class="punk-stmt">Два характера — одна правда</div>
+      <div class="punk-body">ЖИВАЯ говорит природой и светом. Dead Water говорит контрастом и иронией. Внутри в обоих случаях — только вода. Ты выбираешь характер, не состав.</div>
+    </div>
+    <div class="punk-cell r d3">
+      <div class="punk-num">04</div>
+      <div class="punk-stmt">Русский культурный код</div>
+      <div class="punk-body">Живая и мёртвая вода — не маркетинг. Это архетип, которому тысяча лет. Мы первые, кто взял его и сделал честным современным брендом.</div>
+    </div>
+  </div>
 </section>
 
-<!-- TICKER -->
+<!-- TICKER (Red) -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item hi">СОСТАВ: ВОДА</span>
-    <span class="ticker-item">без сахара</span>
-    <span class="ticker-item">без добавок</span>
-    <span class="ticker-item">без обещаний</span>
-    <span class="ticker-item hi">100% честность</span>
-    <span class="ticker-item">без таурина</span>
-    <span class="ticker-item">без красителей</span>
-    <span class="ticker-item hi">SMART DRINKS</span>
-    <span class="ticker-item">без химии</span>
-    <span class="ticker-item">два мира</span>
-    <span class="ticker-item hi">одна правда</span>
-    <span class="ticker-item">500 мл</span>
-    <!-- repeat for loop -->
-    <span class="ticker-item hi">СОСТАВ: ВОДА</span>
-    <span class="ticker-item">без сахара</span>
-    <span class="ticker-item">без добавок</span>
-    <span class="ticker-item">без обещаний</span>
-    <span class="ticker-item hi">100% честность</span>
-    <span class="ticker-item">без таурина</span>
-    <span class="ticker-item">без красителей</span>
-    <span class="ticker-item hi">SMART DRINKS</span>
-    <span class="ticker-item">без химии</span>
-    <span class="ticker-item">два мира</span>
-    <span class="ticker-item hi">одна правда</span>
-    <span class="ticker-item">500 мл</span>
+    <span class="ticker-item">СОСТАВ: ВОДА</span>
+    <span class="ticker-item dim">без сахара</span>
+    <span class="ticker-item dim">без добавок</span>
+    <span class="ticker-item">СОСТАВ: ВОДА</span>
+    <span class="ticker-item dim">без таурина</span>
+    <span class="ticker-item dim">без красителей</span>
+    <span class="ticker-item">SMART DRINKS</span>
+    <span class="ticker-item dim">два мира</span>
+    <span class="ticker-item dim">одна правда</span>
+    <span class="ticker-item">500 МЛ</span>
+    <span class="ticker-item dim">без химии</span>
+    <span class="ticker-item dim">без обещаний</span>
+    <!-- loop -->
+    <span class="ticker-item">СОСТАВ: ВОДА</span>
+    <span class="ticker-item dim">без сахара</span>
+    <span class="ticker-item dim">без добавок</span>
+    <span class="ticker-item">СОСТАВ: ВОДА</span>
+    <span class="ticker-item dim">без таурина</span>
+    <span class="ticker-item dim">без красителей</span>
+    <span class="ticker-item">SMART DRINKS</span>
+    <span class="ticker-item dim">два мира</span>
+    <span class="ticker-item dim">одна правда</span>
+    <span class="ticker-item">500 МЛ</span>
+    <span class="ticker-item dim">без химии</span>
+    <span class="ticker-item dim">без обещаний</span>
   </div>
 </div>
 
 <!-- ЖИВАЯ -->
-<section class="brand brand-zhivaya" id="zhivaya">
-  <div class="brand-img">
-    <img src="zhivaya-lake.png" alt="ЖИВАЯ - вода у горного озера">
+<section class="brand brand-z" id="zhivaya">
+  <div class="brand-photo">
+    <img src="zhivaya-lake.png" alt="ЖИВАЯ">
   </div>
   <div class="brand-body">
-    <div class="zhivaya-kicker r">Бренд №1 - Природа и осознанность</div>
-    <div class="zhivaya-name r r2">ЖИВАЯ</div>
-    <p class="zhivaya-tag r r3">Жизнь в простом. На деле - вода.</p>
-    <ul class="zhivaya-traits r r4">
-      <li>Природа, горы, свежесть</li>
-      <li>Спорт, активный досуг, пробежки</li>
-      <li>Дневная энергия без химии</li>
+    <div class="z-eye r">Бренд 01 — Природа и осознанность</div>
+    <div class="z-name r d1">ЖИВАЯ</div>
+    <p class="z-lead r d2">Жизнь в простом. На деле — вода.</p>
+    <ul class="z-list r d3">
+      <li>Природа, горы, чистота</li>
+      <li>Спорт, активный досуг, свежесть</li>
+      <li>Дневная ясность без химии</li>
       <li>Для тех, кто выбирает честность</li>
     </ul>
-    <a href="#contact" class="btn-green r">Заказать партию</a>
+    <a href="#contact" class="btn-z r d4">Заказать партию</a>
   </div>
 </section>
 
 <!-- DEAD WATER -->
-<section class="brand brand-dead" id="dead">
-  <div class="brand-img">
-    <img src="dead-concert.png" alt="DEAD WATER - на концерте">
+<section class="brand brand-d" id="dead">
+  <div class="brand-photo">
+    <img src="dead-concert.png" alt="DEAD WATER">
   </div>
   <div class="brand-body">
-    <div class="dead-kicker r">Бренд №2 - Анти-энергетик</div>
-    <div class="dead-name r r2">DEAD<br>WATER</div>
-    <p class="dead-tag r r3">Анти-маркетинг. Контраст. На деле - вода.</p>
-    <ul class="dead-traits r r4">
+    <div class="d-eye r">Бренд 02 — Анти-энергетик</div>
+    <div class="d-name r d1">DEAD<br>WATER</div>
+    <p class="d-lead r d2">Анти-маркетинг. Контраст. На деле — вода.</p>
+    <ul class="d-list r d3">
       <li>Ночь, город, клубы, фестивали</li>
       <li>Киберспорт и стриминг</li>
       <li>Ирония над энергетиками</li>
       <li>Та же банка. Честный состав.</li>
     </ul>
-    <a href="#contact" class="btn-red r">Заказать партию</a>
+    <a href="#contact" class="btn-d r d4">Заказать партию</a>
   </div>
 </section>
 
-<!-- GALLERY -->
+<!-- GALLERY (Liquid Death editorial) -->
 <div class="gallery">
-  <div class="gallery-item tall">
+  <div class="gi">
     <img src="zhivaya-gym.png" alt="ЖИВАЯ в зале">
+    <div class="gi-label green-label">ЖИВАЯ — Спорт</div>
   </div>
-  <div class="gallery-item">
+  <div class="gi">
     <img src="dead-ice.png" alt="DEAD WATER во льду">
+    <div class="gi-label red-label">DEAD WATER — Бар</div>
   </div>
-  <div class="gallery-item">
-    <img src="zhivaya-girl.png" alt="ЖИВАЯ - образ жизни">
+  <div class="gi">
+    <img src="zhivaya-girl.png" alt="ЖИВАЯ — образ жизни">
+    <div class="gi-label green-label">ЖИВАЯ — Природа</div>
   </div>
-  <div class="gallery-item">
-    <img src="dead-concert2.png" alt="DEAD WATER - концерт">
+  <div class="gi">
+    <img src="dead-concert2.png" alt="DEAD WATER — концерт">
+    <div class="gi-label red-label">DEAD WATER — Концерт</div>
   </div>
-  <div class="gallery-item">
+  <div class="gi">
     <img src="zhivaya-lake2.png" alt="ЖИВАЯ у озера">
+    <div class="gi-label green-label">ЖИВАЯ — Горы</div>
   </div>
 </div>
 
+<!-- ANTI-STATEMENT (BrewDog contrast) -->
+<section class="anti">
+  <div class="anti-quote r">
+    Они продают
+    <span class="strike">энергию, крылья,<br>перезагрузку, монстра.</span><br>
+    Мы продаём <span class="truth">воду.</span>
+  </div>
+  <div class="anti-attrs r d1">
+    <div class="anti-attr"><strong>100%</strong>Вода</div>
+    <div class="anti-attr"><strong>0%</strong>Химии</div>
+    <div class="anti-attr"><strong>0%</strong>Сахара</div>
+    <div class="anti-attr"><strong>2</strong>Характера</div>
+    <div class="anti-attr"><strong>1</strong>Правда</div>
+  </div>
+</section>
+
 <!-- B2B -->
 <section class="b2b" id="partners">
-  <div class="section-kicker r">Для бизнеса - Волна 1</div>
-  <div class="section-h r r2">Где мы<br>появляемся первыми</div>
+  <div class="b2b-top">
+    <div>
+      <div class="sec-eye r">Для бизнеса — Волна 1</div>
+      <div class="sec-h r d1">Где мы<br>появляемся первыми</div>
+    </div>
+    <p class="b2b-sub r d2">Партнёрская программа для заведений Москвы. Первые 50 партнёров — специальные условия.</p>
+  </div>
   <div class="channels">
-    <div class="channel r">
+    <div class="ch r">
+      <div class="ch-num">01</div>
       <div class="ch-name">Компьютерные клубы</div>
       <div class="ch-desc">Федеральные и локальные сети. Геймеры, стримеры, киберспорт. Ежедневный контакт с аудиторией.</div>
     </div>
-    <div class="channel r r2">
+    <div class="ch r d1">
+      <div class="ch-num">02</div>
       <div class="ch-name">Лазертаг и VR</div>
       <div class="ch-desc">Картинг-центры, арены, экстрим-парки. Активный досуг и высокий трафик.</div>
     </div>
-    <div class="channel r r3">
+    <div class="ch r d2">
+      <div class="ch-num">03</div>
       <div class="ch-name">Бары и клубы</div>
       <div class="ch-desc">Концерты, фестивали, ночная жизнь. Основная среда для Dead Water.</div>
     </div>
-    <div class="channel r r4">
-      <div class="ch-name">Кофейни</div>
-      <div class="ch-desc">Городская молодёжь. Ежедневный трафик, высокая лояльность.</div>
+    <div class="ch r d3">
+      <div class="ch-num">04</div>
+      <div class="ch-name">Кофейни и барбершопы</div>
+      <div class="ch-desc">Городская молодёжь. Ежедневный трафик, высокая лояльность аудитории.</div>
     </div>
-    <div class="channel r">
+    <div class="ch r">
+      <div class="ch-num">05</div>
       <div class="ch-name">Скейт-парки</div>
-      <div class="ch-desc">Стрит-культура, самовыражение. Органическая вирусность.</div>
+      <div class="ch-desc">Стрит-культура, самовыражение. Среда для органической вирусности.</div>
     </div>
-    <div class="channel r r2">
+    <div class="ch r d1">
+      <div class="ch-num">06</div>
       <div class="ch-name">Коворкинги</div>
-      <div class="ch-desc">Стартапы, студенты, фрилансеры. Осознанная аудитория.</div>
+      <div class="ch-desc">Стартапы, студенты, фрилансеры. Осознанная аудитория с высоким чеком.</div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-block" id="contact">
+<section class="cta-sec" id="contact">
   <div class="cta-h r">СТАТЬ<br>ПАРТНЁРОМ</div>
-  <p class="cta-sub r r2">
-    Ищем первых партнёров в РФ - компьютерные клубы, бары,
+  <p class="cta-body r d1">
+    Ищем первых партнёров в Москве — компьютерные клубы, бары,
     кофейни, лазертаг-арены и фестивали.
   </p>
-  <div class="cta-btns r r3">
-    <a class="cta-primary" href="mailto:sales@smartdrinks.pro">Написать нам</a>
-    <a class="cta-secondary" href="https://t.me/SmartDrinksbot">Telegram</a>
+  <div class="cta-btns r d2">
+    <a class="btn-main" href="mailto:sales@smartdrinks.pro">Написать нам</a>
+    <a class="btn-ghost" href="https://t.me/SmartDrinksbot">Telegram</a>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">SMART<em>&nbsp;DRINKS</em></div>
+  <div class="footer-logo">SMART<em> DRINKS</em></div>
   <div class="footer-links">
     <a href="#zhivaya">Живая</a>
     <a href="#dead">Dead Water</a>
@@ -503,26 +699,24 @@ footer {
 </footer>
 
 <script>
-// Hero mouse parallax
+// Hero split on mouse
 const heroEl = document.querySelector('.hero');
-const hLeft = document.querySelector('.hero-left');
-const hRight = document.querySelector('.hero-right');
+const hL = document.querySelector('.hero-left');
+const hR = document.querySelector('.hero-right');
 if (heroEl) {
   heroEl.addEventListener('mousemove', e => {
     const x = e.clientX / heroEl.offsetWidth;
-    hLeft.style.flex = String(1 + (0.5 - x) * 0.5);
-    hRight.style.flex = String(1 + (x - 0.5) * 0.5);
+    hL.style.flex = String(1 + (0.5 - x) * 0.55);
+    hR.style.flex = String(1 + (x - 0.5) * 0.55);
   });
   heroEl.addEventListener('mouseleave', () => {
-    hLeft.style.flex = '1';
-    hRight.style.flex = '1';
+    hL.style.flex = '1'; hR.style.flex = '1';
   });
 }
-
-// Scroll reveal
+// Reveal on scroll
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
 </script>
 </body>
